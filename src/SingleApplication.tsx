@@ -34,7 +34,9 @@ const SingleApplication = ({ application }: SingleApplicationProps) => {
       </div>
       <div className={styles.cell}>
         <sub>Email</sub>
-        <span className={styles.email}>{application.email}</span>
+        <a className={styles.email} href={`mailto:${application.email}`}>
+          {application.email}
+        </a>
       </div>
       <div className={styles.cell}>
         <sub>Loan Amount</sub>
