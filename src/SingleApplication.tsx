@@ -1,7 +1,27 @@
 import React from "react";
 import styles from "./SingleApplication.module.css";
+import { Application } from "./types";
 
-const SingleApplication = ({ application }) => {
+type SingleApplicationProps = {
+  application: Application;
+};
+
+const SingleApplication = ({ application }: SingleApplicationProps) => {
+  const currencyFormatter = new Intl.NumberFormat("en-GB", {
+    style: "currency",
+    currency: "GBP",
+    minimumFractionDigits: 0,
+  });
+
+  const dateFormatter = {
+    format: (d: Date) => {
+      const day = String(d.getDate()).padStart(2, "0");
+      const month = String(d.getMonth() + 1).padStart(2, "0");
+      const year = d.getFullYear();
+      return `${day}-${month}-${year}`;
+    },
+  };
+
   return (
     <div className={styles.SingleApplication}>
       <div className={styles.cell}>
@@ -14,19 +34,19 @@ const SingleApplication = ({ application }) => {
       </div>
       <div className={styles.cell}>
         <sub>Email</sub>
-        {application.email}
+        <span className={styles.email}>{application.email}</span>
       </div>
       <div className={styles.cell}>
         <sub>Loan Amount</sub>
-        {application.loan_amount}
+        {currencyFormatter.format(application.loan_amount)}
       </div>
       <div className={styles.cell}>
         <sub>Application Date</sub>
-        {application.date_created}
+        {dateFormatter.format(new Date(application.date_created))}
       </div>
       <div className={styles.cell}>
         <sub>Expiry date</sub>
-        {application.expiry_date}
+        {dateFormatter.format(new Date(application.expiry_date))}
       </div>
     </div>
   );
