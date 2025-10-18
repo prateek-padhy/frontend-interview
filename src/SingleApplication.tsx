@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styles from "./SingleApplication.module.css";
 import { Application } from "./types";
 
@@ -7,20 +7,27 @@ type SingleApplicationProps = {
 };
 
 const SingleApplication = ({ application }: SingleApplicationProps) => {
-  const currencyFormatter = new Intl.NumberFormat("en-GB", {
-    style: "currency",
-    currency: "GBP",
-    minimumFractionDigits: 0,
-  });
+  const currencyFormatter = useMemo(
+    () =>
+      new Intl.NumberFormat("en-GB", {
+        style: "currency",
+        currency: "GBP",
+        minimumFractionDigits: 0,
+      }),
+    []
+  );
 
-  const dateFormatter = {
-    format: (d: Date) => {
-      const day = String(d.getDate()).padStart(2, "0");
-      const month = String(d.getMonth() + 1).padStart(2, "0");
-      const year = d.getFullYear();
-      return `${day}-${month}-${year}`;
-    },
-  };
+  const dateFormatter = useMemo(
+    () => ({
+      format: (d: Date) => {
+        const day = String(d.getDate()).padStart(2, "0");
+        const month = String(d.getMonth() + 1).padStart(2, "0");
+        const year = d.getFullYear();
+        return `${day}-${month}-${year}`;
+      },
+    }),
+    []
+  );
 
   return (
     <div className={styles.SingleApplication}>
