@@ -1,12 +1,17 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./App.css";
 import Applications from "./Applications";
 import Header from "./Header";
 
+const queryClient = new QueryClient({});
+
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Applications />
+      <QueryClientProvider client={queryClient}>
+        <Header />
+        <Applications />
+      </QueryClientProvider>
     </div>
   );
 }
