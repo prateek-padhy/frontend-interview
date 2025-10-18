@@ -8,12 +8,3 @@
   gap: 16px;
   align-items: center;
 }
-
-.Button {
-  padding: 30px 80px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
